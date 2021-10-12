@@ -79,6 +79,16 @@ func main() {
 					state.Resources[r].Instances[i].Attributes.ID,
 				)
 			}
-		}
+    } else if len(state.Resources[r].Instances) == 1 {
+      fmt.Printf(
+        "terraform import \"%s.%s.%s\" \"%s\"\n",
+        state.Resources[r].Module,
+        state.Resources[r].Type,
+        state.Resources[r].Name,
+        state.Resources[r].Instances[int(0)].Attributes.ID,
+      )
+		} else if len(state.Resources[r].Instances) == 0 {
+      continue
+    }
 	}
 }
